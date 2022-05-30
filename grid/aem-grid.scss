@@ -1,0 +1,51 @@
+@import 'aem-grid-base';
+@import 'aem-grid-mixins';
+
+@mixin aem-grid($max_cols: 12, $gutter: 30px) {
+  /* maximum amount of grid cells to be provided */
+  :where(html) {
+    --gutter: #{$gutter};
+  }
+  $max_col: $max_cols !default;
+  /* default breakpoint */
+  .aem-Grid {
+    @include generate-grid(default, $max_col);
+
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+  @media (min-width: 1201px) {
+    .aem-Grid {
+      @include generate-grid-hide(default);
+    }
+  }
+
+  /* phone breakpoint */
+  @media (max-width: 650px) {
+    .aem-Grid {
+      @include generate-grid(phone, $max_col);
+      @include generate-grid-hide(phone);
+    }
+  }
+
+  /* tablet breakpoint */
+  @media (min-width: 651px) and (max-width: 1200px) {
+    .aem-Grid {
+      @include generate-grid(tablet, $max_col);
+      @include generate-grid-hide(tablet);
+    }
+  }
+
+  .responsivegrid.aem-GridColumn.aem-GridColumn--default--16 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .responsivegrid.aem-GridColumn.aem-GridColumn--default--16
+    > .aem-GridColumn.aem-GridColumn--default--16 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

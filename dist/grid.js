@@ -1,0 +1,1 @@
+function a(){let o=document.querySelectorAll(".aem-Grid"),n=new ResizeObserver(t=>{for(let e of t)if(e.contentBoxSize){let r=Array.isArray(e.contentBoxSize)?e.contentBoxSize[0]:e.contentBoxSize;e.target.style.setProperty("--width",`${r.inlineSize}px`)}});o.forEach(t=>n.observe(t))}export{a as default};
