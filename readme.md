@@ -27,3 +27,7 @@ AemGrid();
   30px
 ); // first param is column count, second is gutter width
 ```
+
+## Credits
+
+Thanks to the grid conversion to scss by [johnjhiggins](https://github.com/jonjhiggins/aem-grid-scss) and [Josh Zeltman](https://twitter.com/joshuazeltman) for the amazing [tailwind-plugin](https://github.com/ez-aem/aem-site-template-tailwind) that I used to convert the grid to scss.
