@@ -1,6 +1,6 @@
 {
   "name": "aem-grid",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "AEM Grid overwrites to make use of a real grid",
   "main": "index.js",
   "scripts": {
