@@ -1,6 +1,6 @@
 import './grid/dist.css';
 export default function () {
-  const aemGrids = document.querySelectorAll('.aem-Grid');
+  const aemGrids = getGridElements();
   const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
       if (entry.contentBoxSize) {
@@ -15,4 +15,35 @@ export default function () {
     }
   });
   aemGrids.forEach((grid) => resizeObserver.observe(grid));
+}
+
+function returnWCMMode(input: string, delimiter: string) {
+  return input
+    .split(delimiter)
+    .filter((e) => e.includes('wcmmode'))[0]
+    ?.split('=')
+    .pop();
+}
+
+function isEditMode() {
+  const wcmmodeCookie = returnWCMMode(document.cookie, ';') === 'edit';
+  const wcmmodeQueryDisabled =
+    returnWCMMode(window.location.search, '?') === 'disabled';
+
+  if (wcmmodeQueryDisabled) {
+    return false;
+  }
+  if (wcmmodeCookie && !wcmmodeQueryDisabled) {
+    return true;
+  }
+  return false;
+}
+
+function getGridElements() {
+  if (!isEditMode()) {
+    return document.querySelectorAll('.aem-Grid');
+  }
+  return document
+    .querySelector('iframe')
+    .contentDocument.body.querySelectorAll('.aem-Grid');
 }
