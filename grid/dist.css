@@ -16,7 +16,6 @@
     var(--grid-column-span) + var(--grid-column-offset)
   );
   grid-column-end: span var(--aem-grid-columns-w-offset, -1);
-  margin-inline-start: calc(var(--aem-grid-margin-column-offset-percent) + var(--aem-grid-gap) * var(--aem-grid-margin-column-offset));
   word-break: break-word;
 }
 

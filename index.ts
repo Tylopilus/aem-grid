@@ -43,6 +43,7 @@ function getGridElements() {
   if (!isEditMode()) {
     return document.querySelectorAll('.aem-Grid');
   }
+  return document.querySelectorAll('.aem-Grid');
   return document
     .querySelector('iframe')
     .contentDocument.body.querySelectorAll('.aem-Grid');

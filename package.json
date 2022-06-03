@@ -19,6 +19,7 @@
   "exports": {
     ".": "./dist/grid.js",
     "./css": "./dist/grid.css",
-    "./scss": "./grid/aem-grid.scss"
+    "./scss": "./grid/aem-grid.scss",
+    "./grid/aem-grid.scss": "./grid/aem-grid.scss"
   }
 }
