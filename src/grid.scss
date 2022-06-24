@@ -5,7 +5,7 @@
   $column: 12,
   $gutter: 16px,
   $breakpoints,
-  $mobileSingleColumn: false
+  $mobile-inherit: true
 ) {
   .aem-Grid {
     display: grid;
@@ -38,7 +38,7 @@
     $i: index(($breakpoints), ($label $bp));
     @if $i < length($breakpoints) {
       @media (max-width: #{$bp}) {
-        @if $mobileSingleColumn {
+        @if not($mobile-inherit) {
           @for $i from 1 through $column {
             .aem-Grid--default--#{$i} {
               grid-template-columns: repeat(#{$i}, 1fr);
@@ -89,8 +89,8 @@
 }
 
 // sample usage of api
-$breakpoints: (
-  'phone': 650px,
-  'tablet': 1200px,
-);
-@include aem-Grid(12, 16px, $breakpoints, false);
+// $breakpoints: (
+//   'phone': 650px,
+//   'tablet': 1200px,
+// );
+// @include aem-Grid(12, 16px, $breakpoints, false);
