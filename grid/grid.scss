@@ -1,0 +1,89 @@
+// no IE support!
+@use 'sass:map';
+
+@mixin aem-Grid(
+  $column: 12,
+  $gutter: 16px,
+  $breakpoints,
+  $mobile-inherit: true
+) {
+  .aem-Grid {
+    display: grid;
+    grid-template-columns: repeat(#{$column}, 1fr);
+    column-gap: $gutter;
+    width: 100%;
+  }
+
+  [class^='aem-Grid--'],
+  [class*=' aem-Grid--'] {
+    grid-column-start: span #{$column};
+  }
+  @for $i from 1 through $column {
+    .aem-Grid--default--#{$i} {
+      grid-template-columns: repeat(#{$i}, 1fr);
+    }
+    .aem-GridColumn--default--#{$i} {
+      grid-column-start: span #{$i};
+    }
+    @for $j from 0 through $column {
+      $combined: $i + $j;
+      @if ($combined <= $column) {
+        .aem-GridColumn--default--#{$i}.aem-GridColumn--offset--default--#{$j} {
+          grid-column: #{$j + 1} / span #{$i};
+        }
+      }
+    }
+  }
+  @each $label, $bp in $breakpoints {
+    $i: index(($breakpoints), ($label $bp));
+    @if $i < length($breakpoints) {
+      @media (max-width: #{$bp}) {
+        @if not($mobile-inherit) {
+          @for $i from 1 through $column {
+            .aem-Grid--default--#{$i} {
+              grid-template-columns: repeat(#{$i}, 1fr);
+            }
+            .aem-GridColumn--default--#{$i} {
+              grid-column-start: span #{$column};
+            }
+          }
+        }
+        @include generateGrid($label, $column);
+      }
+
+      @media (min-width: #{$bp + 1px}) and (max-width: #{nth(nth($breakpoints, $i+1), 2)}) {
+        @include generateGrid(tablet, $column);
+      }
+    } @else {
+      @media (min-width: #{$bp + 1px}) {
+        @include generateGrid(default, 12);
+      }
+    }
+  }
+
+  .aem-Grid-newComponent,
+  .cq-Overlay--placeholder {
+    margin: 0;
+    grid-column: 1/-1;
+  }
+}
+
+@mixin generateGrid($label, $columns) {
+  @for $y from 1 through $columns {
+    .#{aem-Grid--#{$label}}--#{$y} {
+      grid-template-columns: repeat(#{$y}, 1fr);
+    }
+    @for $j from 0 through $columns {
+      $combined: $y + $j;
+      @if ($combined <= 12) {
+        .aem-GridColumn--#{$label}--#{$y}.aem-GridColumn--offset--#{$label}--#{$j} {
+          grid-column: #{$j + 1} / span #{$y};
+        }
+      }
+    }
+    // as in bootstrap
+    .aem-GridColumn--#{$label}--#{$y} {
+      grid-column-start: span #{$y};
+    }
+  }
+}

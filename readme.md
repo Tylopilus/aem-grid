@@ -1,33 +1,25 @@
-# AEM Grid that makes use of css's grid system
+# AEM Grid with true css grid
 
-This module overwrites the default classes which are provided by the base core components to leverage a grid system which is based off of css's grid system.
-This change allows for proper gutter padding and alignment of content without the need of floats.
+## How to use
 
-## Get started
-
-This package exposes in total three exports:
-
-- a javascript default export from 'aem-grid'
-- a minified css output from 'aem-grid/css'
-- a scss output from 'aem-grid/scss'
-
-If your project is scaffoled with the 'aem archetype', you can use the following code to add the grid to your project:
-
-```javascript
-// main.ts
-import AemGrid from 'aem-grid';
-AemGrid();
-```
+1. Install the [grid.zip](https://github.com/Tylopilus/aem-grid/raw/master/grid.zip) package on your author environment
+2. install aem grid npm package with `npm install aem-grid`
+3. In your main.scss file, add the following line:
 
 ```scss
-// main.scss
-@import 'aem-grid/scss';
-@include aem-grid(
-  12,
-  30px
-); // first param is column count, second is gutter width
+@import 'aem-grid';
+
+// define breakpoints
+$breakpoints: (
+  'phone': 650px,
+  'tablet': 1200px,
+);
+// define columns
+$columns: 12;
+// define gutter padding
+$gutter: 16px;
+// define if mobile should inherit desktop adjustments
+$mobile-inherit: false;
+
+@include aem-Grid(12, 16px, $breakpoints, $mobile-inherit);
 ```
-
-## Credits
-
-Thanks to the grid conversion to scss by [johnjhiggins](https://github.com/jonjhiggins/aem-grid-scss) and [Josh Zeltman](https://twitter.com/joshuazeltman) for the amazing [tailwind-plugin](https://github.com/ez-aem/aem-site-template-tailwind) that I used to convert the grid to scss.
