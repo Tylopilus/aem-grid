@@ -2,7 +2,7 @@
 
 ## How to use
 
-1. Install the [grid.zip](https://github.com/Tylopilus/aem-grid/blob/master/grid.zip) package on your author environment
+1. Install the [grid.zip](https://github.com/Tylopilus/aem-grid/raw/master/grid.zip) package on your author environment
 2. install aem grid npm package with `npm install aem-grid`
 3. In your main.scss file, add the following line:
 
