@@ -1,0 +1,19 @@
+{
+  "name": "aem-grid",
+  "version": "0.0.3",
+  "description": "AEM Grid overwrites to make use of a real grid",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "build": "sass ./src/build.scss:./dist/grid.min.css --style compressed"
+  },
+  "author": "Helge Ahrens",
+  "license": "MIT",
+  "homepage": "https://github.com/Tylopilus/aem-grid",
+  "dependencies": {
+    "sass": "^1.53.0"
+  },
+  "exports": {
+    ".": "./src/grid.scss",
+    "./css": "./dist/grid.min.css"
+  }
+}
