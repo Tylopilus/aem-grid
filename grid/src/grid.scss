@@ -35,24 +35,49 @@
     }
   }
   @each $label, $bp in $breakpoints {
-    $i: index(($breakpoints), ($label $bp));
+    $i: index(($breakpoints), ($label $bp))-1;
+
     @if $i < length($breakpoints) {
-      @media (max-width: #{$bp}) {
-        @if not($mobile-inherit) {
-          @for $i from 1 through $column {
-            .aem-Grid--default--#{$i} {
-              grid-template-columns: repeat(#{$i}, 1fr);
-            }
-            .aem-GridColumn--default--#{$i} {
-              grid-column-start: span #{$column};
+      @if $i == 0 {
+        @media (max-width: #{$bp}) {
+          @if not($mobile-inherit) {
+            @for $i from 1 through $column {
+              // double the class name to increase specificity
+              .aem-Grid--default--#{$i}.aem-Grid--default--#{$i} {
+                grid-template-columns: repeat(#{$i}, 1fr);
+              }
+              // double the class name to increase specificity
+              .aem-GridColumn--default--#{$i}.aem-GridColumn--default--#{$i} {
+                grid-column-start: span #{$column};
+              }
             }
           }
+          @include generateGrid($label, $column);
         }
-        @include generateGrid($label, $column);
-      }
 
-      @media (min-width: #{$bp + 1px}) and (max-width: #{nth(nth($breakpoints, $i+1), 2)}) {
-        @include generateGrid(tablet, $column);
+        @media (min-width: #{$bp + 1px}) and (max-width: #{nth(nth($breakpoints, $i+1), 2)}) {
+          @include generateGrid(tablet, $column);
+        }
+      } @else {
+        @media (min-width: #{nth(nth($breakpoints, $i), 2)+1}) and (max-width: #{$bp}) {
+          @if not($mobile-inherit) {
+            @for $i from 1 through $column {
+              // double the class name to increase specificity
+              .aem-Grid--default--#{$i}.aem-Grid--default--#{$i} {
+                grid-template-columns: repeat(#{$i}, 1fr);
+              }
+              // double the class name to increase specificity
+              .aem-GridColumn--default--#{$i}.aem-GridColumn--default--#{$i} {
+                grid-column-start: span #{$column};
+              }
+            }
+          }
+          @include generateGrid($label, $column);
+        }
+
+        @media (min-width: #{$bp + 1px}) and (max-width: #{nth(nth($breakpoints, $i+1), 2)}) {
+          @include generateGrid(tablet, $column);
+        }
       }
     } @else {
       @media (min-width: #{$bp + 1px}) {
