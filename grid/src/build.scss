@@ -1,7 +1,24 @@
-@use './grid.scss';
+@import './grid.scss';
 // sample usage of api
+:where(html) {
+  --grid-gutter: 16px;
+}
+
 $breakpoints: (
-  'phone': 650px,
-  'tablet': 1200px,
+  'phone': 390px,
+  'tablet': 1024px,
 );
-@include grid.aem-Grid(12, 16px, $breakpoints, false);
+// define columns
+$columns: 12;
+
+// define gutter padding
+$gutter: var(--grid-gutter);
+// define if mobile should inherit desktop adjustments
+$mobile-inherit: false;
+
+@include aem-Grid($columns, $gutter, $breakpoints, $mobile-inherit);
+// $breakpoints: (
+//   'phone': 650px,
+//   'tablet': 1200px,
+// );
+// @include grid.aem-Grid(12, 16px, $breakpoints, false);

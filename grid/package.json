@@ -4,7 +4,8 @@
   "description": "AEM Grid overwrites to make use of a real grid",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "build": "sass ./src/build.scss:./dist/grid.min.css --style compressed"
+    "build": "sass ./src/build.scss:./dist/grid.min.css --style compressed",
+    "dev": "sass ./src/build.scss:./dist/grid.css"
   },
   "author": "Helge Ahrens",
   "license": "MIT",
