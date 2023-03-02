@@ -38,6 +38,7 @@
     $i: index(($breakpoints), ($label $bp))-1;
 
     // .debug-#{$label} {
+    //   label: $label;
     //   index: $i;
     //   length: length($breakpoints);
     //   bp: $bp;
@@ -45,6 +46,13 @@
     //     igt0: #{nth(nth($breakpoints, $i), 2) + 1};
     //   }
     // }
+    @if $i == length($breakpoints)-1 {
+      @media screen and (min-width: #{$bp + 1px}) {
+        [class*='default--hide'] {
+          display: none;
+        }
+      }
+    }
     @if $i < length($breakpoints) {
       @if $i == 0 {
         @media (max-width: #{$bp}) {
@@ -91,6 +99,13 @@
     margin: 0;
     grid-column: 1/-1;
   }
+
+  /* Add show/hide for hiding elements */
+  .aem-GridShowHidden {
+    [class*='--hide'] {
+      display: block !important;
+    }
+  }
 }
 
 @mixin generateGrid($label, $columns) {
@@ -110,6 +125,9 @@
     .aem-GridColumn--#{$label}--#{$y} {
       grid-column-start: span #{$y};
     }
+  }
+  [class*='#{$label}--hide'] {
+    display: none;
   }
 }
 
